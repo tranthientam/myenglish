@@ -1,0 +1,369 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHẦN MỀM HỌC TIẾNG ANH CỦA TÂM TRẦN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        #folder-selection {
+            display: block;
+        }
+        #game-section {
+            display: none;
+            text-align: center; /* Căn giữa nội dung trong game-section */
+        }
+        #word-display {
+            font-size: 2em;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+        #input-word {
+            padding: 10px;
+            font-size: 1.2em;
+            width: 200px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #folder-select {
+            padding: 10px;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            width: 220px;
+            border-radius: 5px;
+        }
+        #start-btn, #submit-btn, #next-btn, #home-btn, #replay-sound-btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        #start-btn:hover, #submit-btn:hover, #next-btn:hover, #home-btn:hover, #replay-sound-btn:hover {
+            background-color: #0056b3;
+        }
+        #next-btn {
+            display: none;
+        }
+        #feedback {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #333;
+            text-align: center;
+            min-height: 1.5em; /* Đảm bảo không gian cho feedback */
+        }
+        #score, #total-checked {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #28a745;
+        }
+        .controls-container { /* Container cho các nút điều khiển */
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap; /* Cho phép các nút xuống dòng nếu không đủ chỗ */
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="folder-selection">
+        <h1>PHẦN MỀM HỌC TIẾNG ANH CỦA TÂM TRẦN</h1>
+        <label for="folder-select">Chọn thư mục từ vựng:</label>
+        <select id="folder-select">
+            <option value="" disabled selected>Chọn một thư mục</option>
+            <option value="all">TẤT CẢ</option>
+            <option value="kitchen">Dụng cụ nhà bếp</option>
+            <option value="20250512">20250512</option>
+            <option value="20250518">20250518</option>
+        </select>
+        <button id="start-btn">Bắt đầu</button>
+    </div>
+
+    <div id="game-section">
+        <h1>PHẦN MỀM HỌC TIẾNG ANH CỦA TÂM TRẦN</h1>
+        <div id="word-display"></div>
+        <input type="text" id="input-word" placeholder="Gõ từ tiếng Anh..." autocomplete="off">
+        <div class="controls-container">
+            <button id="submit-btn">Kiểm Tra</button>
+            <button id="next-btn">Next</button>
+            <label for="replay-count-input" style="margin-left: 10px; font-size: 0.9em;">Số lần nghe:</label>
+            <input type="number" id="replay-count-input" value="1" min="1" style="width: 50px; padding: 8px; font-size: 0.9em; margin-right: 5px; margin-left: 5px; border-radius: 5px; border: 1px solid #ccc;">
+            <button id="replay-sound-btn">Nghe lại</button>
+            <button id="home-btn" style="margin-left:10px;">Về trang chủ</button>
+        </div>
+        <div id="feedback"></div>
+        <div id="score">Điểm: 0</div>
+        <div id="total-checked">Tổng từ đã kiểm tra: 0</div>
+    </div>
+
+    <script>
+        const folders = {
+            kitchen: [
+                { vietnamese: "khay", english: "tray", ipa: "/treɪ/" },
+                { vietnamese: "ly", english: "glass", ipa: "/ɡlæs/" },
+                { vietnamese: "chày", english: "pestle", ipa: "/ˈpes.əl/" },
+                { vietnamese: "lon", english: "can", ipa: "/kæn/" },
+                { vietnamese: "bình", english: "jug", ipa: "/dʒʌɡ/" },
+                { vietnamese: "chai", english: "bottle", ipa: "/ˈbɒt.əl/" },
+                { vietnamese: "đũa", english: "chopsticks", ipa: "/ˈtʃɒp.stɪks/" },
+                { vietnamese: "dao", english: "knife", ipa: "/naɪf/" },
+                { vietnamese: "bát", english: "bowl", ipa: "/bəʊl/" }
+            ],
+            "20250512": [
+                { vietnamese: "Thùng rác", english: "bin", ipa: "/bɪn/" },
+                { vietnamese: "Cây lau nhà", english: "mop", ipa: "/mɒp/" },
+                { vietnamese: "Gối", english: "pillow", ipa: "/ˈpɪl.əʊ/" },
+                { vietnamese: "Khăn", english: "towel", ipa: "/ˈtaʊ.əl/" },
+                { vietnamese: "Cái xô", english: "bucket", ipa: "/ˈbʌk.ɪt/" },
+                { vietnamese: "Giẻ lau", english: "rag", ipa: "/ræɡ/" },
+                { vietnamese: "Chổi", english: "broom", ipa: "/bruːm/" },
+                { vietnamese: "Đồ hốt rác", english: "dustpan", ipa: "/ˈdʌst.pæn/" },
+                { vietnamese: "Bình giữ nhiệt", english: "thermos", ipa: "/ˈθɜː.məs/" }
+                        ],
+"20250518": [
+                { vietnamese: "Thùng rác", english: "bin", ipa: "/bɪn/" },
+                { vietnamese: "dao", english: "knife", ipa: "/naɪf/" },
+                { vietnamese: "bát", english: "bowl", ipa: "/bəʊl/" }
+                ],
+            
+        };
+
+        let currentWord = null;
+        let score = 0;
+        let totalChecked = 0;
+        let currentFolder = null;
+        let usedWords = [];
+        let soundRepeatCount = 0; // Biến toàn cục để theo dõi số lần lặp lại âm thanh
+
+        const folderSelection = document.getElementById("folder-selection");
+        const gameSection = document.getElementById("game-section");
+        const folderSelect = document.getElementById("folder-select");
+        const startBtn = document.getElementById("start-btn");
+        const wordDisplay = document.getElementById("word-display");
+        const inputWord = document.getElementById("input-word");
+        const submitBtn = document.getElementById("submit-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const homeBtn = document.getElementById("home-btn");
+        const replaySoundBtn = document.getElementById("replay-sound-btn");
+        const replayCountInput = document.getElementById("replay-count-input"); // Thêm ô nhập số lần
+        const feedback = document.getElementById("feedback");
+        const scoreDisplay = document.getElementById("score");
+        const totalCheckedDisplay = document.getElementById("total-checked");
+
+        function playWordSound(word, times = 1) {
+            if (!('speechSynthesis' in window) || !word) {
+                if (!word) console.warn("Không có từ để phát âm.");
+                else console.warn("Trình duyệt không hỗ trợ Text-to-Speech.");
+                return;
+            }
+
+            let count = parseInt(times, 10);
+            if (isNaN(count) || count <= 0) {
+                count = 1;
+            }
+            soundRepeatCount = count; // Đặt số lần lặp lại
+
+            function speakInternal() {
+                if (soundRepeatCount <= 0) return; // Dừng nếu không còn lần lặp nào
+
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                utterance.volume = 1;
+                utterance.rate = 1;
+                utterance.pitch = 1;
+
+                utterance.onend = () => {
+                    soundRepeatCount--;
+                    if (soundRepeatCount > 0) {
+                        // setTimeout(speakInternal, 50); // Có thể thêm độ trễ nhỏ nếu muốn
+                        speakInternal();
+                    }
+                };
+                utterance.onerror = (event) => {
+                    console.error("Lỗi phát âm thanh: ", event);
+                    soundRepeatCount = 0; // Dừng lặp khi có lỗi
+                };
+                
+                window.speechSynthesis.cancel(); // Hủy bỏ bất kỳ âm thanh nào đang phát
+                window.speechSynthesis.speak(utterance);
+            }
+            speakInternal(); // Bắt đầu phát âm lần đầu
+        }
+
+
+        function getRandomWord() {
+            let vocabulary;
+            if (currentFolder === "all") {
+                vocabulary = [].concat(...Object.values(folders));
+            } else {
+                vocabulary = folders[currentFolder];
+            }
+            const availableWords = vocabulary.filter(word => !usedWords.includes(word.english));
+            if (availableWords.length === 0) {
+                feedback.textContent = "Bạn đã hoàn thành tất cả từ vựng! Nhấn 'Về trang chủ' để chơi lại.";
+                feedback.style.color = "#28a745";
+                inputWord.disabled = true;
+                submitBtn.style.display = "none";
+                nextBtn.style.display = "none";
+                return null;
+            }
+            const randomIndex = Math.floor(Math.random() * availableWords.length);
+            return availableWords[randomIndex];
+        }
+
+        function displayNewWord() {
+            currentWord = getRandomWord();
+            if (currentWord) {
+                wordDisplay.textContent = currentWord.vietnamese;
+                inputWord.value = "";
+                inputWord.disabled = false;
+                submitBtn.style.display = "inline-block";
+                nextBtn.style.display = "none";
+                feedback.textContent = "";
+                inputWord.focus();
+            }
+        }
+
+        function checkWord() {
+            if (!currentWord) return;
+
+            const userInput = inputWord.value.trim().toLowerCase();
+            totalChecked++;
+            totalCheckedDisplay.textContent = `Tổng từ đã kiểm tra: ${totalChecked}`;
+            if (currentWord.english && userInput === currentWord.english.toLowerCase()) {
+                feedback.textContent = `Chính xác! "${currentWord.vietnamese}" là "${currentWord.english}" (${currentWord.ipa})`;
+                feedback.style.color = "#28a745";
+                score++;
+                scoreDisplay.textContent = `Điểm: ${score}`;
+                usedWords.push(currentWord.english);
+                playWordSound(currentWord.english, 1); // Phát âm 1 lần khi đúng
+                inputWord.disabled = true;
+                submitBtn.style.display = "none";
+                nextBtn.style.display = "inline-block";
+                nextBtn.focus();
+            } else {
+                feedback.textContent = `Sai rồi! "${currentWord.vietnamese}" không phải "${userInput}". Thử lại!`;
+                feedback.style.color = "#dc3545";
+            }
+        }
+
+        function returnToHome() {
+            window.speechSynthesis.cancel(); // Dừng phát âm nếu đang phát khi về trang chủ
+            gameSection.style.display = "none";
+            folderSelection.style.display = "block";
+            score = 0;
+            totalChecked = 0;
+            usedWords = [];
+            currentWord = null;
+            scoreDisplay.textContent = `Điểm: ${score}`;
+            totalCheckedDisplay.textContent = `Tổng từ đã kiểm tra: ${totalChecked}`;
+            folderSelect.value = "";
+            currentFolder = null;
+            inputWord.disabled = false;
+            submitBtn.style.display = "inline-block";
+            nextBtn.style.display = "none";
+            feedback.textContent = "";
+        }
+
+        startBtn.addEventListener("click", () => {
+            if (folderSelect.value) {
+                currentFolder = folderSelect.value;
+                folderSelection.style.display = "none";
+                gameSection.style.display = "block";
+                score = 0;
+                totalChecked = 0;
+                usedWords = [];
+                scoreDisplay.textContent = `Điểm: ${score}`;
+                totalCheckedDisplay.textContent = `Tổng từ đã kiểm tra: ${totalChecked}`;
+                feedback.textContent = "";
+                displayNewWord();
+            } else {
+                alert("Vui lòng chọn một thư mục từ vựng!");
+            }
+        });
+
+        submitBtn.addEventListener("click", checkWord);
+        nextBtn.addEventListener("click", displayNewWord);
+        homeBtn.addEventListener("click", returnToHome);
+
+        replaySoundBtn.addEventListener("click", () => {
+            if (currentWord && currentWord.english) {
+                const times = parseInt(replayCountInput.value, 10);
+                playWordSound(currentWord.english, times >= 1 ? times : 1);
+            }
+        });
+
+        inputWord.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                if (nextBtn.style.display === "inline-block") {
+                    displayNewWord();
+                } else if (submitBtn.style.display === "inline-block") {
+                    checkWord();
+                }
+            }
+        });
+
+        folderSelect.addEventListener("keypress", (e) => {
+            if (e.key === "Enter" && folderSelect.value) {
+                startBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
