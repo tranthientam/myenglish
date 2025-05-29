@@ -384,5 +384,24 @@
             }
         });
     </script>
+        <body>
+<!-- phần chọn thư mục không đổi -->
+<!-- thêm nút "Đáp án" vào giao diện game -->
+<!-- thêm dưới nút replay-sound-btn -->
+<!-- đoạn HTML mới trong div game-section -->
+<!-- Thêm nút "Đáp án" -->
+<button id="show-answer-btn" style="margin-left:10px; background-color:#6c757d;">Đáp án</button>
+<!-- phần JS thêm chức năng -->
+<script>
+// giữ nguyên toàn bộ mã hiện tại...
+// thêm sự kiện cho nút "Đáp án"
+const showAnswerBtn = document.getElementById("show-answer-btn");
+showAnswerBtn.addEventListener("click", () => {
+  if (currentWord) {
+    feedback.textContent = `Đáp án đúng là: "${currentWord.english}" (${currentWord.ipa})`;
+    feedback.style.color = "#ffc107";
+  }
+});
+</script>
 </body>
 </html>
