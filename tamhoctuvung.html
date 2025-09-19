@@ -128,12 +128,7 @@
         <select id="folder-select">
             <option value="" disabled selected>Chọn một thư mục</option>
             <option value="all">TẤT CẢ</option>
-            <option value="kitchen">Dụng cụ nhà bếp</option>
-            <option value="20250512">20250512</option>
-            <option value="20250523">20250523</option>
-            <option value="letstalkenglish">letstalkenglish</option>
-           <option value="E20250619">E20250619</option>
-            <option value="E20250712">E20250712</option>
+           <option value="E20250919">E20250919</option>
               </select>
         <button id="start-btn">Bắt đầu</button>
     </div>
@@ -157,74 +152,18 @@
 
     <script>
         const folders = {
-            kitchen: [
-                { vietnamese: "khay", english: "tray", ipa: "/treɪ/" },
-                { vietnamese: "ly", english: "glass", ipa: "/ɡlæs/" },
-                { vietnamese: "chày", english: "pestle", ipa: "/ˈpes.əl/" },
-                { vietnamese: "lon", english: "can", ipa: "/kæn/" },
-                { vietnamese: "bình", english: "jug", ipa: "/dʒʌɡ/" },
-                { vietnamese: "chai", english: "bottle", ipa: "/ˈbɒt.əl/" },
-                { vietnamese: "đũa", english: "chopsticks", ipa: "/ˈtʃɒp.stɪks/" },
-                { vietnamese: "dao", english: "knife", ipa: "/naɪf/" },
-                { vietnamese: "bát", english: "bowl", ipa: "/bəʊl/" }
-            ],
-            "20250512": [
-                { vietnamese: "Thùng rác", english: "bin", ipa: "/bɪn/" },
-                { vietnamese: "Cây lau nhà", english: "mop", ipa: "/mɒp/" },
-                { vietnamese: "Gối", english: "pillow", ipa: "/ˈpɪl.əʊ/" },
-                { vietnamese: "Khăn", english: "towel", ipa: "/ˈtaʊ.əl/" },
-                { vietnamese: "Cái xô", english: "bucket", ipa: "/ˈbʌk.ɪt/" },
-                { vietnamese: "Giẻ lau", english: "rag", ipa: "/ræɡ/" },
-                { vietnamese: "Chổi", english: "broom", ipa: "/bruːm/" },
-                { vietnamese: "Đồ hốt rác", english: "dustpan", ipa: "/ˈdʌst.pæn/" },
-                { vietnamese: "Bình giữ nhiệt", english: "thermos", ipa: "/ˈθɜː.məs/" },
-                    { vietnamese: "Kệ", english: "shelf", ipa: "/ʃɛlf/" }
-                        ],
-"20250523": [
-{ vietnamese: "Ổ cắm điện", english: "outlet", ipa: "/ˈaʊt.lɛt/" },
-
-{ vietnamese: "Cốp xe", english: "trunk", ipa: "/trʌŋk/" },
-
-{ vietnamese: "Thảm", english: "mat", ipa: "/mæt/" },
-
-{ vietnamese: "Giá đỡ", english: "rack", ipa: "/ræk/" },
-
-{ vietnamese: "Móc treo", english: "hanger", ipa: "/ˈhæŋ.ər/" },
-
-{ vietnamese: "Ghế dài", english: "bench", ipa: "/bɛntʃ/" },
-
-{ vietnamese: "Bộ sạc", english: "charger", ipa: "/ˈtʃɑːr.dʒər/" }
-                ],
-"letstalkenglish": [
-                  { vietnamese: "Bạn muốn nói chuyện với Becca", english: "you want to talk to Becca", ipa: "/ju wɒnt tə tɔːk tə ˈbɛkə/" },
-                  { vietnamese: "Cô ấy không ở đây, được thôi, không sao", english: "she's not here, sure, no problem", ipa: "/ʃiːz nɒt hɪər, ʃʊər, nəʊ ˈprɒbləm/" },
-                  { vietnamese: "Bạn luôn trả lời điện thoại như vậy à?", english: "do you always answer the phone like that?", ipa: "/duː ju ˈɔːlweɪz ˈænsər ðə fəʊn laɪk ðæt/" },
-                  { vietnamese: "Thỉnh thoảng", english: "sometimes", ipa: "/ˈsʌmtaɪmz/" },
-                  { vietnamese: "Đó không phải cách trả lời điện thoại ở chỗ làm", english: "that's not the way to answer the phone at work", ipa: "/ðæts nɒt ðə weɪ tə ˈænsər ðə fəʊn æt wɜːrk/" },
-                  { vietnamese: "Bạn nên nói cảm ơn vì đã gọi đến quán net, đây là Aaron", english: "you should say thank you for calling the net cafe, this is Aaron", ipa: "/ju ʃʊd seɪ θæŋk ju fər ˈkɔːlɪŋ ðə nɛt kæˈfeɪ, ðɪs ɪz ˈærən/" }
-                   ],
-                 "E20250619": [
-{ vietnamese: "Tôi sẽ cố gắng đi ngủ sớm mỗi ngày", english: "I will try to go to bed early every day", ipa: "/aɪ wɪl traɪ tə ɡəʊ tə bɛd ˈɜːli ˈɛvri deɪ/" },
-{ vietnamese: "Tôi sẽ cố gắng tập trung vào công việc", english: "I will try to focus on my work", ipa: "/aɪ wɪl traɪ tə ˈfəʊkəs ɒn maɪ wɜːk/" },
-{ vietnamese: "Tôi sẽ cố gắng làm việc chăm chỉ để kiếm tiền", english: "I will try to work hard to earn money", ipa: "/aɪ wɪl traɪ tə wɜːk hɑːd tə ɜːn ˈmʌni/" },
-{ vietnamese: "Tôi sẽ cố gắng hoàn thành công việc đúng hạn", english: "I will try to finish my work on time", ipa: "/aɪ wɪl traɪ tə ˈfɪnɪʃ maɪ wɜːk ɒn taɪm/" },
-{ vietnamese: "Tôi sẽ cố gắng giải quyết vấn đề này nhanh chóng", english: "I will try to solve this problem quickly", ipa: "/aɪ wɪl traɪ tə sɒlv ðɪs ˈprɒbləm ˈkwɪkli/" },
-{ vietnamese: "Tôi sẽ cố gắng tiết kiệm tiền mỗi tháng", english: "I will try to save money every month", ipa: "/aɪ wɪl traɪ tə seɪv ˈmʌni ˈɛvri mʌnθ/" },
-{ vietnamese: "Tôi sẽ cố gắng trả hết nợ trong năm nay", english: "I will try to pay off my debt this year", ipa: "/aɪ wɪl traɪ tə peɪ ɒf maɪ dɛt ðɪs jɪə/" },
-{ vietnamese: "Tôi sẽ cố gắng học cách nấu ăn", english: "I will try to learn how to cook", ipa: "/aɪ wɪl traɪ tə lɜːn haʊ tə kʊk/" }
-                   ],
-                "E20250712": [
-{ vietnamese: "Tôi muốn bạn học tiếng Anh", english: "I want you to learn English", ipa: "/aɪ wɑːnt juː tuː lɜrn ˈɪŋɡlɪʃ/" },
-{ vietnamese: "Tôi muốn bạn đừng nói những lời tục tĩu", english: "I want you not to say bad words", ipa: "/aɪ wɑːnt juː nɑːt tuː seɪ bæd wɝːdz/" },
-{ vietnamese: "Tôi muốn bạn nấu bữa tối", english: "I want you to cook dinner", ipa: "/aɪ wɑːnt juː tuː kʊk ˈdɪnɚ/" },
-{ vietnamese: "Tôi muốn bạn nói tiếng Anh mỗi ngày", english: "I want you to speak English every day", ipa: "/aɪ wɑːnt juː tuː spiːk ˈɪŋɡlɪʃ ˈɛvri deɪ/" },
-{ vietnamese: "Tôi muốn bạn uống đủ nước", english: "I want you to drink enough water", ipa: "/aɪ wɑːnt juː tuː drɪŋk ɪˈnʌf ˈwɑːtɚ/" },
-{ vietnamese: "Tôi muốn bạn tập trung vào việc học", english: "I want you to focus on your studies", ipa: "/aɪ wɑːnt juː tuː ˈfoʊkəs ɑːn jʊr ˈstʌdiz/" },
-{ vietnamese: "Tôi muốn bạn tập thể dục mỗi ngày", english: "I want you to exercise every day", ipa: "/aɪ wɑːnt juː tuː ˈeksɚsaɪz ˈɛvri deɪ/" },
-{ vietnamese: "Tôi muốn bạn đánh răng sau khi ăn", english: "I want you to brush your teeth after eating", ipa: "/aɪ wɑːnt juː tuː brʌʃ jʊr tiːθ ˈæftɚ ˈiːtɪŋ/" },
-{ vietnamese: "Tôi muốn bạn đi ngủ sớm mỗi ngày", english: "I want you to go to bed early every day", ipa: "/aɪ wɑːnt juː tuː ɡoʊ tuː bɛd ˈɜːrli ˈɛvri deɪ/" },
-{ vietnamese: "Tôi muốn bạn dọn dẹp đồ chơi của mình", english: "I want you to tidy up your toys", ipa: "/aɪ wɑːnt juː tuː ˈtaɪdi ʌp jʊr tɔɪz/" }
-
+                                           "E20250919": [
+{ vietnamese: "Để tôi lấy cho bạn chút gì đó để uống", english: "Let me get you something to drink", ipa: "/lɛt mi ɡɛt ju ˈsʌmθɪŋ tə drɪŋk/" },
+{ vietnamese: "Cứ tự nhiên", english: "Go ahead", ipa: "/ɡoʊ əˈhɛd/" },
+{ vietnamese: "Tại sao bạn la hét vậy?", english: "Why are you yelling?", ipa: "/waɪ ɑːr ju ˈjelɪŋ/" },
+{ vietnamese: "Chúng ta đã không gặp nhau một thời gian rồi", english: "We haven't met for a while", ipa: "/wi ˈhævənt mɛt fɔr ə waɪl/" },
+{ vietnamese: "Bạn vẫn dùng lại mẹo cũ của mình", english: "You still use your old trick", ipa: "/ju stɪl juz jʊr oʊld trɪk/" },
+{ vietnamese: "Nó thật sự rất đau", english: "It really hurts", ipa: "/ɪt ˈrɪli hɝːts/" },
+{ vietnamese: "Tôi đã nghĩ bạn là kẻ trộm", english: "I thought you were a thief", ipa: "/aɪ θɔːt ju wɝː ə θiːf/" },
+{ vietnamese: "Kẻ trộm nào?", english: "What thief?", ipa: "/wʌt θiːf/" },
+{ vietnamese: "Tôi đã muốn làm bạn ngạc nhiên", english: "I wanted to surprise you", ipa: "/aɪ ˈwɑːntəd tə sərˈpraɪz ju/" },
+{ vietnamese: "Nhưng cú cắn của bạn làm tôi đau kinh khủng", english: "But your bite hurts me like hell", ipa: "/bət jʊr baɪt hɝːts mi laɪk hɛl/"},
+{ vietnamese: "Bạn có thể gọi tôi bằng một cái tên khác không?", english: "Can you call me by another name?", ipa: "/kən ju kɑːl mi baɪ əˈnʌðɚ neɪm/" }                                                                            
                               ],
         };
 
