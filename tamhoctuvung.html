@@ -257,37 +257,37 @@
         }
 
 
-        function getRandomWord() {
-            let vocabulary;
-            if (currentFolder === "all") {
-                vocabulary = [].concat(...Object.values(folders));
-            } else {
-                vocabulary = folders[currentFolder];
-            }
-            const availableWords = vocabulary.filter(word => !usedWords.includes(word.english));
-            if (availableWords.length === 0) {
-                feedback.textContent = "Bạn đã hoàn thành tất cả từ vựng! Nhấn 'Về trang chủ' để chơi lại.";
-                feedback.style.color = "#28a745";
-                inputWord.disabled = true;
-                submitBtn.style.display = "none";
-                nextBtn.style.display = "none";
-                return null;
-            }
-            const randomIndex = Math.floor(Math.random() * availableWords.length);
-            return availableWords[randomIndex];
-        }
+function getRandomWord() {
+    let vocabulary;
+    if (currentFolder === "all") {
+        vocabulary = [].concat(...Object.values(folders));
+    } else {
+        vocabulary = folders[currentFolder];
+    }
+    const availableWords = vocabulary.filter(word => !usedWords.includes(word.english));
+    if (availableWords.length === 0) {
+        feedback.textContent = "Bạn đã hoàn thành tất cả từ vựng! Nhấn 'Về trang chủ' để chơi lại.";
+        feedback.style.color = "#28a745";
+        inputWord.disabled = true;
+        submitBtn.style.display = "none";
+        nextBtn.style.display = "none";
+        return null;
+    }
+    return availableWords[0]; // Chọn từ đầu tiên thay vì random
+}
 
-        function displayNewWord() {
-            currentWord = getRandomWord();
-            if (currentWord) {
-                wordDisplay.textContent = currentWord.vietnamese;
-                inputWord.value = "";
-                inputWord.disabled = false;
-                submitBtn.style.display = "inline-block";
-                nextBtn.style.display = "none";
-                feedback.textContent = "";
-                inputWord.focus();
-            }
+function displayNewWord() {
+    currentWord = getRandomWord();
+    if (currentWord) {
+        wordDisplay.textContent = currentWord.vietnamese;
+        inputWord.value = "";
+        inputWord.disabled = false;
+        submitBtn.style.display = "inline-block";
+        nextBtn.style.display = "none";
+        feedback.textContent = "";
+        inputWord.focus();
+    }
+
         }
 
         function checkWord() {
