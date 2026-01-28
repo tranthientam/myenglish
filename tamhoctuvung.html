@@ -128,9 +128,7 @@
         <select id="folder-select">
             <option value="" disabled selected>Chọn một thư mục</option>
             <option value="all">TẤT CẢ</option>
-                <option value="E20250919">E20250919</option>
-                <option value="E20250922">E20250922</option>
-                <option value="E20251003">E20251003</option>
+                <option value="E20260128">E20260128</option>
                                
               </select>
         <button id="start-btn">Bắt đầu</button>
@@ -155,43 +153,12 @@
 
     <script>
         const folders = {
-                                           "E20250919": [
-{ vietnamese: "Để tôi lấy cho bạn chút gì đó để uống", english: "Let me get you something to drink", ipa: "/lɛt mi ɡɛt ju ˈsʌmθɪŋ tə drɪŋk/" },
-{ vietnamese: "Cứ tự nhiên", english: "Go ahead", ipa: "/ɡoʊ əˈhɛd/" },
-{ vietnamese: "Tại sao bạn la hét vậy", english: "Why are you yelling", ipa: "/waɪ ɑːr ju ˈjelɪŋ/" },
-{ vietnamese: "Chúng ta đã không gặp nhau một thời gian rồi", english: "We haven't met for a while", ipa: "/wi ˈhævənt mɛt fɔr ə waɪl/" },
-{ vietnamese: "Bạn vẫn dùng lại mẹo cũ của mình", english: "You still use your old trick", ipa: "/ju stɪl juz jʊr oʊld trɪk/" },
-{ vietnamese: "Nó thật sự rất đau", english: "It really hurts", ipa: "/ɪt ˈrɪli hɝːts/" },
-{ vietnamese: "Tôi đã nghĩ bạn là kẻ trộm", english: "I thought you were a thief", ipa: "/aɪ θɔːt ju wɝː ə θiːf/" },
-{ vietnamese: "Kẻ trộm nào", english: "What thief", ipa: "/wʌt θiːf/" },
-{ vietnamese: "Tôi đã muốn làm bạn ngạc nhiên", english: "I wanted to surprise you", ipa: "/aɪ ˈwɑːntəd tə sərˈpraɪz ju/" },
-{ vietnamese: "Nhưng cú cắn của bạn làm tôi đau kinh khủng", english: "But your bite hurts me like hell", ipa: "/bət jʊr baɪt hɝːts mi laɪk hɛl/"},
-{ vietnamese: "Bạn có thể gọi tôi bằng một cái tên khác không", english: "Can you call me by another name", ipa: "/kən ju kɑːl mi baɪ əˈnʌðɚ neɪm/" }                                                                            
-                              ],
-                  "E20250922": [
-{ vietnamese: "Quên nó đi", english: "Forget about it", ipa: "/fɚˈɡɛt əˈbaʊt ɪt/" },
-{ vietnamese: "Bạn có nhớ tôi không?", english: "Do you remember me", ipa: "/du jʊ rɪˈmɛmbɚ mi/" },
-{ vietnamese: "Bạn ở đây một mình à?", english: "Are you here by yourself", ipa: "/ɑːr ju hɪr baɪ jɚˈsɛlf/" },
-{ vietnamese: "Chú Lâm ở đâu?", english: "Where is uncle Lam", ipa: "/wɛr ɪz ˈʌŋkəl læm/"},
-{ vietnamese: "Ai mà biết", english: "Who knows", ipa: "/huː noʊz/"},                          
-{ vietnamese: "Muốn hành động như hoàng tử bạch mã", english: "Want to act like Prince Charming", ipa: "/wɑːnt tə ækt laɪk prɪns ˈtʃɑːrmɪŋ/" },
-                          { vietnamese: "Bạn giống như một hoàng tử đang ngã hơn", english: "you are more like a prince falling", ipa: "/jʊr mɔːr laɪk ə prɪns ˈfɑːlɪŋ/"},
-                          { vietnamese: "Vậy dạo này hai bạn thế nào?", english: "So, how are you two doing these days", ipa: "/soʊ, haʊ ɑːr ju tuː ˈduːɪŋ ðiz deɪz/" },
-                          { vietnamese: "Chúng tôi ổn", english: "We are fine", ipa: "/wi ɑːr faɪn/"}
-                           ],
-                  "E20251003": [
-                          { vietnamese: "Cô ấy đã trả lời tôi rồi trong khi bạn còn đang suy nghĩ", english: "She is answered me already while you were thinking", ipa: "/ʃiz ˈænsər mi ɑlˈrɛdi waɪl ju wər ˈθɪŋkɪŋ/" },
-                          { vietnamese: "Vậy bây giờ bạn còn bỏ áo vô quần, phải không?", english: "So, now you tuck in your shirt, don't you", ipa: "/soʊ naʊ ju tʌk ɪn jʊr ʃɝt doʊnt ju/" },
-                          { vietnamese: "Tôi muốn trông lịch sự.", english: "I want to look polite", ipa: "/aɪ wɑnt tə lʊk pəˈlaɪt/" },
-                          { vietnamese: "Nốt ruồi của bạn ở đâu?", english: "Where's your mole", ipa: "/wɛrz jʊr moʊl/"},
-                          { vietnamese: "Nó đã bị tẩy đi rồi.", english: "It was removed", ipa: "/ɪt wəz rɪˈmuːvd/" },
-                          { vietnamese: "Làm sao bạn biết?", english: "How do you know", ipa: "/haʊ də ju noʊ/" },
-                          { vietnamese: "Tôi đoán vậy.", english: "I guess", ipa: "/aɪ ɡɛs/"},
-                          { vietnamese: "Hai người muốn gì từ mẹ tôi?", english: "What do you two want from my mom", ipa: "/wʌt də ju tu wɑnt frəm maɪ mɑm/"},
-                          { vietnamese: "Chúng tôi cần một lý do để đến đây sao?", english: "Do we need a reason to come here", ipa: "/du wi nid ə ˈrizən tə kʌm hɪr/" },
-                          { vietnamese: "Chúng tôi rảnh nên đến đây chơi. Được chứ?", english: "We are free so we come here to hang out alright", ipa: "/wɪr fri soʊ wi kʌm hɪr tə hæŋ aʊt ɔlˈraɪt/" },
-                          { vietnamese: "Mẹ tôi không rảnh như hai người. Bà ấy vẫn còn phải đi bán vé.", english: "My mom isn't as free as you two. She still has to go and sell the tickets", ipa: "/maɪ mɑm ˈɪznt æz fri æz ju tu ʃi stɪl hæz tə ɡoʊ ən sɛl ðə ˈtɪkəts/" }
-                              ],        
+                "E20260128": [
+                          { vietnamese: "Tôi sẽ lo việc này", english: "I'll take care of it", ipa: "/aɪl teɪk kɛr əv ɪt/" },
+                          { vietnamese: "Bạn đọc được suy nghĩ của tôi", english: "You read my mind", ipa: "/ju rɛd maɪnd/" },
+                          { vietnamese: "Đừng làm tôi cười", english: "Don't make me laugh", ipa: "/doʊnt meɪk mi læf/" },
+                        { vietnamese: "Bạn có muốn hay không?", english: "You want it or not?", ipa: "/ju wɑnt ɪt ɔr nɑt/" }
+                              ],  
         };
 
         let currentWord = null;
